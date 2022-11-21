@@ -132,7 +132,4 @@
   {{-- model close --}}
 
 
-
-
-
   @include('footer')
