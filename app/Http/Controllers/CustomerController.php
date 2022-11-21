@@ -44,7 +44,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        return view('addcity');
     }
 
     /**
@@ -72,9 +72,11 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $cities = City::get();
+        return view('cities',compact('cities'));
+
     }
 
     /**
@@ -96,9 +98,12 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        //dd('hello wold');
+        City::updateOrCreate(['id'=>$request->id],
+        ['name'=>$request->name]);
+        return response()->json(['success','City Added successfully']);
     }
 
     /**

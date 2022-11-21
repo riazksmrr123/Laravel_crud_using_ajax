@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\CityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +23,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']); //->name('home');
 Route::resource('customers',CustomerController::class)->middleware('auth');
+//Route::resource('cities',CityController::class);
+//Route::get('show',[CityController::class,'show']);
+//Route::post('update',[CustomerController::class,'update']);
+// Route::post('create',[CityController::class,'create']);
