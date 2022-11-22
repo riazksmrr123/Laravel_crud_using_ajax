@@ -24,6 +24,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']); //->name('home');
 Route::resource('customers',CustomerController::class);//->middleware('auth');
 Route::get('addnewcity',[CustomerController::class,'addnewcity']);
+Route::post('createcity',[CustomerController::class,'createcity']);
 //Route::resource('cities',CityController::class);
 //Route::get('show',[CityController::class,'show']);
 //Route::post('update',[CustomerController::class,'update']);

@@ -167,8 +167,18 @@
     <!-- AdminLTE for demo purposes -->
     <script src="{{ asset('dist/js/demo.js')}}"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="{{ asset('dist/js/pages/dashboard2.js')}}"></script>
-      
+
+      <script>
+        $(".nav-sidebar li a").click(function(){
+            $(".nav-sidebar li").toggleClass("menu-is-opening menu-open");
+        });
+
+        $(".navbar-nav .arrow").click(function(){
+            $("body").toggleClass("sidebar-collapse");
+        });
+
+        
+      </script>
   </div>
 </body>
 </html>

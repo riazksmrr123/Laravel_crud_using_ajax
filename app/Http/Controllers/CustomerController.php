@@ -42,6 +42,8 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     
     public function create(Request $request)
     {
         // dd($request);
@@ -124,10 +126,14 @@ class CustomerController extends Controller
      */
     public function update(Request $request)
     {
-        // dd($request);
-        // City::Create(['id'=>$request->id],
-        // ['name'=>$request->name]);
-        // return response()->json(['success','City Added successfully']);
+        if($request->filled('name')){
+                // dd($request);
+                City::updateOrCreate(['id'=>$request->id],
+                ['name'=>$request->name]);
+                return response()->json(['success','City Added successfully']);
+                return redirect()->route('customers');
+                }
+        return redirect('addnewcity');
     }
 
     /**

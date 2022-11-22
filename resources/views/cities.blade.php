@@ -1,7 +1,10 @@
 @include('header')
-<div class="col-md-6">
+@include('sidebar')
+@include('navbar')
+<div class="content-wrapper">
+<div class="col-md-6 mx-auto pt-5">
     <div class="card">
-        <div class="card-header">
+        <div class="card-header bg-info text-white">
             <h3 class="card-title">All Cities</h3>
         </div>
         <!-- /.card-header -->
@@ -37,5 +40,6 @@
         </div>
     </div>
 
+</div>
 </div>
 @include('footer')

@@ -11,7 +11,7 @@
       </div>
       <!-- /.card-header -->
       <!-- form start -->
-      <form action="{{route('customers/create')}}" class="form-horizontal"  method="POST" >
+      <form action="{{url('customers/update')}}" class="form-horizontal"  method="POST" >
         {{-- {{ csrf_field() }} --}}
         @csrf
         @method('put')
