@@ -42,9 +42,20 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('addcity');
+        // dd($request);
+        if($request->filled('name')){ 
+        // $input = $request->all();
+        // City::create($input);
+        // return redirect('customers')->with('flash_message', 'City Added!');
+        // dd($request);
+        City::Create(['id'=>$request->id],
+        ['name'=>$request->name]);
+        return redirect()->route('customers');
+        return response()->json(['success','City Added successfully']);
+        }
+    return redirect('addnewcity');
     }
 
     /**
@@ -85,6 +96,19 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function addnewcity()
+    {
+
+        return view('addcity');
+
+
+        // $cities = City::get();
+        // return view('cities',compact('cities'));
+
+    }
+
+
+
     public function edit($id)
     {
         $customers=Customer::find($id);
@@ -100,10 +124,10 @@ class CustomerController extends Controller
      */
     public function update(Request $request)
     {
-        //dd('hello wold');
-        City::updateOrCreate(['id'=>$request->id],
-        ['name'=>$request->name]);
-        return response()->json(['success','City Added successfully']);
+        // dd($request);
+        // City::Create(['id'=>$request->id],
+        // ['name'=>$request->name]);
+        // return response()->json(['success','City Added successfully']);
     }
 
     /**
