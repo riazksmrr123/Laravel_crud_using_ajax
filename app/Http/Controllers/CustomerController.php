@@ -14,6 +14,8 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     //Show all customers record
     public function index(Request $request)
     {
         $cities = City::get();
@@ -46,18 +48,7 @@ class CustomerController extends Controller
      
     public function create(Request $request)
     {
-        // dd($request);
-        if($request->filled('name')){ 
-        // $input = $request->all();
-        // City::create($input);
-        // return redirect('customers')->with('flash_message', 'City Added!');
-        // dd($request);
-        City::Create(['id'=>$request->id],
-        ['name'=>$request->name]);
-        return redirect()->route('customers');
-        return response()->json(['success','City Added successfully']);
-        }
-    return redirect('addnewcity');
+        //
     }
 
     /**
@@ -66,6 +57,8 @@ class CustomerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+     //Create user if not exist,update if exist
     public function store(Request $request)
     {
 
@@ -87,8 +80,8 @@ class CustomerController extends Controller
      */
     public function show()
     {
-        $cities = City::get();
-        return view('cities',compact('cities'));
+        // $cities = City::get();
+        // return view('cities',compact('cities'));
 
     }
 
@@ -98,19 +91,8 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function addnewcity()
-    {
 
-        return view('addcity');
-
-
-        // $cities = City::get();
-        // return view('cities',compact('cities'));
-
-    }
-
-
-
+     //Show Edit form
     public function edit($id)
     {
         $customers=Customer::find($id);
@@ -126,14 +108,7 @@ class CustomerController extends Controller
      */
     public function update(Request $request)
     {
-        if($request->filled('name')){
-                // dd($request);
-                City::updateOrCreate(['id'=>$request->id],
-                ['name'=>$request->name]);
-                return response()->json(['success','City Added successfully']);
-                return redirect()->route('customers');
-                }
-        return redirect('addnewcity');
+        //
     }
 
     /**
@@ -142,9 +117,10 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+     //Delete Customer
     public function destroy($id)
     {
-        //dd('delete controller testing');
         Customer::find($id)->delete();
         return response()->json(['success'=>'Customer Deleted successfully']);
     }

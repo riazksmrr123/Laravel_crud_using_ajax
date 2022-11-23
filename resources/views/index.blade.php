@@ -1,5 +1,5 @@
-@include('header')
-@include('sidebar')
+@include('layouts.header')
+@include('layouts.sidebar')
 <style>
   .pagination,.dataTables_filter{float:right;}
 </style>
@@ -42,12 +42,7 @@
           <div class="col-sm-6">
             <h1>Customers Record</h1>
           </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard</li>
-            </ol>
-          </div>
+
         </div>
       </div><!-- /.container-fluid -->
     </section>
@@ -139,4 +134,4 @@
   {{-- model close --}}
 
 
-  @include('footer')
+  @include('layouts.footer')

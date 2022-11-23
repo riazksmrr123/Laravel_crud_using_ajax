@@ -1,6 +1,6 @@
-@include('header')
-@include('sidebar')
-@include('navbar')
+@include('layouts.header')
+@include('layouts.sidebar')
+@include('layouts.navbar')
 <div class="content-wrapper">
     <style>
         .pagination,
@@ -17,7 +17,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <table id="example1" name='city-table' class="table table-bordered table-striped city-table">
+                <table id="citytable" name='city-table' class="table table-bordered table-striped city-table">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -30,8 +30,9 @@
                             <td>{{ $city->id }}</td>
                             <td>{{ $city->name }}</td>
                         </tr>
+                        @endforeach
                     </tbody>
-                    @endforeach
+                    
                 </table>
             </div>
             <!-- /.card-body -->
@@ -40,13 +41,13 @@
 </div>
 <script>
     $(function() {
-        $("#example1").DataTable({
+        $("#citytable").DataTable({
             "responsive": true,
             "lengthChange": false,
             "autoWidth": false,
             // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        $('#example2').DataTable({
+        }).buttons().container().appendTo('#citytable_wrapper .col-md-6:eq(0)');
+        $('#citytable2').DataTable({
             "paging": true,
             "lengthChange": false,
             "searching": true,
@@ -59,4 +60,4 @@
 </script>
 
 
-@include('footer')
+@include('layouts.footer')

@@ -167,6 +167,8 @@
     <!-- AdminLTE for demo purposes -->
     <script src="{{ asset('dist/js/demo.js')}}"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    {{-- font awsome --}}
+    <script src="https://kit.fontawesome.com/5c0658bf56.js" crossorigin="anonymous"></script>
 
       <script>
         $(".nav-sidebar li a").click(function(){

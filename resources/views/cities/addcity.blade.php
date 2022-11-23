@@ -11,10 +11,10 @@
       </div>
       <!-- /.card-header -->
       <!-- form start -->
-      <form action="{{url('customers/update')}}" class="form-horizontal"  method="POST" >
+      <form action="{{url('cities/create')}}" class="form-horizontal"  method="POST" >
         {{-- {{ csrf_field() }} --}}
         @csrf
-        @method('put')
+        
         <div class="card-body">
 
           <div class="form-group-row">
