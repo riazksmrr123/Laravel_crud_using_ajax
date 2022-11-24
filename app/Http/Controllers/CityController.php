@@ -32,6 +32,7 @@ class CityController extends Controller
                 ['name'=>$request->name]);
                 return response()->json(['success','City Added successfully']);
                 return redirect()->route('customers');
+                return response()->json(['success'=>'City is successfully added']);
                 }
         return redirect('cities.addcity');
     }

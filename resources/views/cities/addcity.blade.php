@@ -1,6 +1,6 @@
-@include('header')
-@include('sidebar')
-@include('navbar')
+@include('layouts.header')
+@include('layouts.sidebar')
+@include('layouts.navbar')
 
 <div class="content-wrapper">
   <div class="col-md-8 mx-auto pt-5">
@@ -11,7 +11,7 @@
       </div>
       <!-- /.card-header -->
       <!-- form start -->
-      <form action="{{url('cities/create')}}" class="form-horizontal"  method="POST" >
+      <form action="" class="form-horizontal"  method="" >
         {{-- {{ csrf_field() }} --}}
         @csrf
         
@@ -27,7 +27,7 @@
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
-          <button type="submit" class="btn btn-info float-right px-4">Add</button>
+          <button type="submit" class="btn btn-info float-right px-4" id="butsave">Add</button>
         </div>
         <!-- /.card-footer -->
       </form>
@@ -36,4 +36,46 @@
   </div>
 
 </div>
-  @include('footer')
+
+{{--   start ajax   --}}
+<script>
+
+$(document).ready(function() {
+   
+  $('#butsave').on('click', function() {
+    var name = $('#name').val();
+    if(name!=""){
+      /*  $("#butsave").attr("disabled", "disabled"); */
+        $.ajax({
+            url: "{{ url('/cities/create') }}",
+            type: "POST",
+            data: {
+                _token: $("#csrf").val(),
+                name: name
+            },
+            cache: false,
+            success: function(dataResult){
+              alert("Your City Added Successfully!")
+
+                console.log(dataResult);
+                var dataResult = JSON.parse(dataResult);
+                if(dataResult.statusCode==200){
+                  window.location = "{{ url('/cities/index') }}";				
+                }
+                else if(dataResult.statusCode==201){
+                   alert("Error occured !");
+                }
+                
+            }
+        });
+    }
+    else{
+        alert('Please fill the City Name field !');
+    }
+});
+});
+</script>
+
+
+{{--   end ajax   --}}
+  @include('layouts.footer')
