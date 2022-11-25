@@ -112,13 +112,15 @@
                       </div>
                       <div class="form-group">
                           City<br>
-                          <select class="form-control" name="CityID" id="CityID" required>
-                              <option selected value="">Select City</option>
+                          <select class="form-control select2-multiple" name="CityID" id="CityID" multiple="multiple" required>
+                            <optgroup label="Select City">
                               @foreach ($cities as $city)
                               <option value={{ $city->id }}>{{ $city->name }}</option>
                               @endforeach
+                            </optgroup>
                           </select>
                       </div>
+                      
                       <div class="form-group">
                           <label for="notes">Notes</label>
                           <textarea class="form-control" rows="3" name="notes" id="notes"

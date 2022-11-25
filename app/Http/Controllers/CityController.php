@@ -30,22 +30,11 @@ class CityController extends Controller
                 // dd($request);
                 City::updateOrCreate(['id'=>$request->id],
                 ['name'=>$request->name]);
+                dd('Hello');
                 return response()->json(['success','City Added successfully']);
-                return redirect()->route('customers');
-                return response()->json(['success'=>'City is successfully added']);
+                return redirect('/cities/index');
                 }
         return redirect('cities.addcity');
     }
 
 }
-
-
-
-function create(Request $request)
-    {
-        //dd('hello wold');
-        City::updateOrCreate(['id'=>$request->id],
-        ['name'=>$request->name]);
-        return response()->json(['success','City Added successfully']);
-    }
-

@@ -103,9 +103,9 @@
     </script>
     {{-- DataTable Links scpipts --}}
     
-    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <script src="{{asset('/plugins/jquery/jquery.min.js')}}"></script>
     <!-- Bootstrap 4 -->
-    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{asset('/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
     <!-- DataTables  & Plugins -->
     <script src="{{asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
@@ -169,18 +169,39 @@
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     {{-- font awsome --}}
     <script src="https://kit.fontawesome.com/5c0658bf56.js" crossorigin="anonymous"></script>
+    {{-- <!-- Select2 --> --}}
+    <script src="{{ asset('plugins/select2/js/select2.full.min.js')}}"></script>
+
+
+
+    {{-- end toast --}}
 
       <script>
-        $(".nav-sidebar li a").click(function(){
-            $(".nav-sidebar li").toggleClass("menu-is-opening menu-open");
+        // side menu toggle
+        $(".nav-sidebar li").click(function(){
+            var getid = $(this).attr("id");
+            $('#'+getid).toggleClass("menu-is-opening menu-open");
         });
+        // close
 
+        // sidebar close
         $(".navbar-nav .arrow").click(function(){
             $("body").toggleClass("sidebar-collapse");
         });
 
         
       </script>
+
+      {{-- select2 --}}
+
+      <script>
+        $('#CityID').select2({
+            multiple:true
+        });
+        $('#CityID').find(':selected').data('custom-attribute');
+      </script>
+
+      {{-- End select2 --}}
   </div>
 </body>
 </html>

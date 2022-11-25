@@ -13,7 +13,7 @@
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
-                    <li class="nav-item">
+                    <li class="nav-item" id="city">
                         <a href="#" class="nav-link">
                             <i class="fas fa-city"></i>
                             <p>
@@ -34,11 +34,10 @@
                                     <p>Add</p>
                                 </a>
                             </li>
-                        </ul>        <
+                        </ul> 
                     </li>
-
-                        {{-- customers menue --}}
-                    <li class="nav-item">
+                        {{-- customers manue --}}
+                    <li class="nav-item" id="customer">
                         <a href="#" class="nav-link">
                             <i class="fa-solid fa-user"></i>
                             <p>
@@ -47,7 +46,7 @@
                             </p>
                         </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
+                                <li class="nav-item ">
                                     <a href="{{ url('customers') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>List</p>
@@ -62,6 +61,37 @@
                                 </li>
                             </ul>
                     </li>
+                    {{-- end customers manue --}}
+
+                    {{-- product manue --}}
+
+                    <li class="nav-item" id="product">
+                        <a href="#" class="nav-link">
+                            <i class="fa-brands fa-product-hunt"></i>
+                            <p>
+                                Products
+                                <i class="right fas fa-angle-right"></i>
+                            </p>
+                        </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item ">
+                                    <a href="{{ url('products/index') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>List</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ url('products/create') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add</p>
+                                    </a>
+                                </li>
+                            </ul>
+                    </li>
+
+                    {{-- end product manue --}}
+
+                   
                 </ul>
             </nav>
 
