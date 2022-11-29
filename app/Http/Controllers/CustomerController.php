@@ -36,7 +36,7 @@ class CustomerController extends Controller
             return $allcustomerdata;
 
         }
-        return view('index',compact('customers', 'cities'));
+        return view('customers.index',compact('customers', 'cities'));
     }
 
     /**

@@ -53,7 +53,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="javascript:void(0)" id="createNewCustomer" class="nav-link">
+                                    <a href="javascript:void(0)" id="addCustomer_menu" class="nav-link">
                                         {{-- <a href="addnewcity" class="nav-link"> --}}
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Add</p>
@@ -64,7 +64,6 @@
                     {{-- end customers manue --}}
 
                     {{-- product manue --}}
-
                     <li class="nav-item" id="product">
                         <a href="#" class="nav-link">
                             <i class="fa-brands fa-product-hunt"></i>
@@ -88,8 +87,34 @@
                                 </li>
                             </ul>
                     </li>
-
                     {{-- end product manue --}}
+
+                    {{-- orders --}}
+                    <li class="nav-item" id="orders">
+                        <a href="#" class="nav-link">
+                            <i class="fa-brands fa-product"></i>
+                            <p>
+                                Orders
+                                <i class="right fas fa-angle-right"></i>
+                            </p>
+                        </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item ">
+                                    <a href="{{ url('orders/index') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>List</p>
+                                    </a>
+                                </li>
+                                {{-- <li class="nav-item">
+                                    <a href="{{ url('products/create') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add</p>
+                                    </a>
+                                </li> --}}
+                            </ul>
+                    </li>
+
+                    {{-- ./orders --}}
 
                    
                 </ul>

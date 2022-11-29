@@ -7,6 +7,7 @@
                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
               }
           });
+          
           var table = $(".data-table").DataTable({
               serverSide: true,
               processing: true,
@@ -37,14 +38,22 @@
                   },
               ]
           });
+
+        //   open model
           $("#createNewCustomer").click(function() {
               $("#customer_id").val('');
               $("#customerForm").trigger('reset');
               $("#modalHeading").html('Add Customer');
               $("#ajaxModel").modal('show');
-
-
           });
+
+        //   
+       
+        //   close
+          $("#addCustomer_menu").click(function() {
+            $("#createNewCustomer").click();
+          });
+          
 
           $('body').on('click', '.editCustomer', function() {
               var customer_id = $(this).data('id');
@@ -192,7 +201,7 @@
         
       </script>
 
-      {{-- select2 --}}
+      {{-- select2 for Cities in customer form--}}
 
       <script>
         $('#CityID').select2({
@@ -200,8 +209,25 @@
         });
         $('#CityID').find(':selected').data('custom-attribute');
       </script>
+      {{-- end select2 for Cities in customer form--}}
 
-      {{-- End select2 --}}
+      {{-- selct2 for customer name in create order page --}}
+      <script>
+        $('#customerName').select2({
+            multiple:true
+        });
+        $('#customerName').find(':selected').data('custom-attribute');
+      </script>
+      {{-- end selct2 for customer name in create order page --}}
+
+            {{-- selct2 for product name in create order page --}}
+            <script>
+                $('#productName').select2({
+                    multiple:true
+                });
+                $('#productName').find(':selected').data('custom-attribute');
+              </script>
+              {{-- end selct2 for product name in create order page --}}
   </div>
 </body>
 </html>

@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CityController;
+use App\Http\Controllers\OrderController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -24,10 +26,18 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']); //->name('home');
 Route::resource('customers',CustomerController::class);//->middleware('auth');
+
 Route::get('cities/index',[CityController::class,'index']);
 Route::get('cities/add',[CityController::class,'show']);
 Route::post('cities/create',[CityController::class,'create']);
+
 Route::get('products/index',[ProductController::class,'index']);
-Route::get('/products/create',[ProductController::class,'create']);
+Route::get('products/create',[ProductController::class,'create']);
+Route::post('products/store',[ProductController::class,'store']);
+Route::get('products/edit/{id}',[ProductController::class,'edit']);
+Route::post('products/delete/{id}',[ProductController::class,'destroy']);
+
+Route::get('orders/index',[OrderController::class,'index']);
+Route::get('orders/create',[OrderController::class,'create']);
 
 

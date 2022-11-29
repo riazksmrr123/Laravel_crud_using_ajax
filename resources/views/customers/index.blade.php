@@ -101,17 +101,17 @@
                   <form id="customerForm" name="customerForm" class="form-horizontal">
                       <input type="hidden" name="customer_id" id="customer_id">
                       <div class="form-group">
-                          Name<br>
+                        <label>Name</label>
                           <input type="text" class="form-control" id="name" name="name"
                               placeholder="Enter Name" value="" required>
                       </div>
                       <div class="form-group">
-                          Address:<br>
+                        <label>Address:</label>
                           <input type="text" class="form-control" id="address" name="address"
                               placeholder="Enter Address" value="" required>
                       </div>
                       <div class="form-group">
-                          City<br>
+                        <label for="city"> City</label>
                           <select class="form-control select2-multiple" name="CityID" id="CityID" multiple="multiple" required>
                             <optgroup label="Select City">
                               @foreach ($cities as $city)
@@ -126,8 +126,10 @@
                           <textarea class="form-control" rows="3" name="notes" id="notes"
                               placeholder="Your Notes"></textarea>
                       </div>
-                      <button type="submit" class="btn btn-primary mt-3" id="saveBtn"
+                      <div class="form-group">
+                        <button type="submit" class="btn btn-primary mt-2" id="saveBtn"
                           value="create">Save</button>
+                      </div>
                   </form>
               </div>
           </div>

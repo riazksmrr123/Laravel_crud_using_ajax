@@ -8,13 +8,18 @@
             float: right;
         }
     </style>
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>All Cities</h1>
+                </div>
+
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
     <div class="col-12 py-3">
         <div class="card">
-            <div class="bg-info">
-                <div class="card-header">
-                    <h1 class="card-title">All Cities</h1>
-                </div>
-            </div>
             <!-- /.card-header -->
             <div class="card-body">
                 <table id="citytable" name='city-table' class="table table-bordered table-striped city-table">
