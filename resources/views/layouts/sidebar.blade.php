@@ -15,7 +15,7 @@
                     data-accordion="false">
                     <li class="nav-item" id="city">
                         <a href="#" class="nav-link">
-                            <i class="fas fa-city"></i>
+                            <i class="mr-1 fas fa-city"></i>
                             <p>
                                 Cities
                                 <i class="right fas fa-angle-right"></i>
@@ -37,9 +37,9 @@
                         </ul> 
                     </li>
                         {{-- customers manue --}}
-                    <li class="nav-item" id="customer">
+                    <li class="mr-1 nav-item" id="customer">
                         <a href="#" class="nav-link">
-                            <i class="fa-solid fa-user"></i>
+                            <i class="fa fa-solid fa-user"></i>
                             <p>
                                 Customers
                                 <i class="right fas fa-angle-right"></i>
@@ -66,7 +66,7 @@
                     {{-- product manue --}}
                     <li class="nav-item" id="product">
                         <a href="#" class="nav-link">
-                            <i class="fa-brands fa-product-hunt"></i>
+                            <i class="mr-1 fa fa-sharp fa-solid fa-circle"></i>
                             <p>
                                 Products
                                 <i class="right fas fa-angle-right"></i>
@@ -92,7 +92,7 @@
                     {{-- orders --}}
                     <li class="nav-item" id="orders">
                         <a href="#" class="nav-link">
-                            <i class="fa-brands fa-product"></i>
+                            <i class="mr-1 fa fa-solid fa-file-invoice"></i>
                             <p>
                                 Orders
                                 <i class="right fas fa-angle-right"></i>

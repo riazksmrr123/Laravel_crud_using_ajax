@@ -53,7 +53,7 @@
                                 <td>{{ $product->sku }}</td>
                                 <td>
                                     <div class="btn-group">
-                                    <a href="{{ url('products/edit', $product->id)}}" class="btn btn-primary" method="post">Edit</a>
+                                    <a href="{{ url('products/edit', $product->id)}}" class="btn btn-primary mr-1" method="post">Edit</a>
                                     <form action="{{ url('products/delete', $product->id)}}" method="post">
                                       @csrf
                                       <button class="btn btn-danger" type="submit" data-inline="true">Delete</button>

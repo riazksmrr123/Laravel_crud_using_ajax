@@ -36,6 +36,7 @@ Route::get('products/create',[ProductController::class,'create']);
 Route::post('products/store',[ProductController::class,'store']);
 Route::get('products/edit/{id}',[ProductController::class,'edit']);
 Route::post('products/delete/{id}',[ProductController::class,'destroy']);
+Route::put('products/update/{id}',[ProductController::class,'update']);
 
 Route::get('orders/index',[OrderController::class,'index']);
 Route::get('orders/create',[OrderController::class,'create']);
