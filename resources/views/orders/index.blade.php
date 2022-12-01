@@ -3,13 +3,13 @@
 @include('layouts.navbar')
 
 <div class="content-wrapper">
-<div class="card col">
+<div class="card col mt-4 col">
   <section>
 <div class="content-header">
   <div class="container-fluid">
     <div class="row-mb-2">
       <div class="col-sm-6">
-        <h3>All Orders</h3>
+        <h3>Order Details</h3>
       </div>
     </div>
   </div>
@@ -24,20 +24,26 @@
           <tr>
             <th>Order ID</th>
             <th>Product</th>
-            <th>Price</th>
+            <th>Unit Price</th>
             <th>Quantity</th>
             <th>Status</th>
             <th>Created</th>
+            <th>Deliverd Date</th>
+            <th>Sub Total</th>
           </tr>
           </thead>
           <tbody>
           <tr>
-            <td><a href="pages/examples/invoice.html">OR9842</a></td>
+            <td>OR9842</td>
             <td>Call of Duty IV</td>
-            <td><span class="badge badge-success">Shipped</span></td>
+            <td>45</td>
             <td>
-              <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
+              <div>2</div>
             </td>
+            <td>Shipped</td>
+            <td>Created Date</td>
+            <td>Deliverd Date</td>
+            <td>90</td>
           </tr>
           </tbody>
         </table>

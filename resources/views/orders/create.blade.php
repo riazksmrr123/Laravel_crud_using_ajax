@@ -6,77 +6,131 @@
     <div class="content-wrapper py-5 px-4">
         <form action="{{ url('orders/store') }}" enctype="multipart/form-data" method="POST">
             @csrf
-            <h3>Select Product Details</h3>
-            <div class="row">
-                <div class="col-md-8 bg-white mt-4">
-                    <div class="container py-4">
-                        <div class="row mb-4">
-                            {{-- select product --}}
-                            <select class="col-md-5 mr-md-1" name="productName" placeholder="select Product" required>
-                                <optgroup label="Select Product Name">
-                                    @foreach ($products as $product)
-                                        <option value={{ $product->id }}>{{ $product->name }}</option>
-                                    @endforeach
-                                </optgroup>
-                            </select>
-                            <input type="text" name="salePrice" class="col-md-3 mr-md-1" placeholder="price">
-                            <input type="text" name="quantity" class="col-md-3 mr-md-1" placeholder="quantity">
-                            <button class="btn btn-primary">Add</button>
-                        </div>
-                        {{-- <div class="row pt-4">
-                            <h3>Order Details</h3>
-                        </div> --}}
-                        {{-- start table --}}
-                        <div class="col-w-100 mt-2">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h3 class="card-title">Your Order Details</h3>
-                                </div>
-                                <!-- /.card-header -->
-                                <div class="card-body">
-                                    <table class="table table-bordered min-height:35px">
-                                        <thead>
-                                            <tr>
-                                                <th style="width: 10px">#</th>
-                                                <th>Product</th>
-                                                <th>Price</th>
-                                                <th>Quantity</th>
-                                                <th>Amount</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1.</td>
-                                                <td>software</td>
-                                                <td>200</td>
-                                                <td>2</td>
-                                                <td>400</td>
-                                            </tr>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <!-- /.card-body -->
-                                <div class="card-footer clearfix"><div>
-                                    <h5 class="float-right">Total Amount:<td class="mr-5">400</td>
-                                    </h5>
-                                </div>
-                                </div>
-                            </div>
-                        </div>
-                        {{-- end table --}}
+            <div class="card col ">
+                <div class="card-header">
+                    <div>
+                        <h6>Create Order</h6>
                     </div>
                 </div>
-                <div class="col-md-4 px-4">
-                    <h3>Customer</h3>
-                    <select class="form-control w-100" name="customerName" required>
-                        <optgroup label="Select Customer Name">
-                            @foreach ($customers as $customer)
-                                <option value={{ $customer->id }}>{{ $customer->name }}</option>
-                            @endforeach
-                        </optgroup>
-                    </select>
-                    <input type="date" class="form-control w-100 mt-2" name="">
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-md-12 bg-white">
+                            <div class="container">
+                                <div class="row mb-4">
+                                    {{-- cut --}}
+                                    {{-- ./cut --}}
+                                </div>
+                            </div>
+                            <div class="w-100">
+                                <label for="name">Customer Name*</label>
+                                <select class="form-control mb-4 w-100" name="customerName" required>
+                                    <optgroup label="Select Customer Name">
+                                        @foreach ($customers as $customer)
+                                            <option value={{ $customer->id }}>{{ $customer->name }}</option>
+                                        @endforeach
+                                    </optgroup>
+                                </select>
+                                <label for="date">Date*</label>
+                                <input type="date" class="form-control w-100" name="">
+                            </div>
+                        </div>
+                    </div>
+                    {{-- product --}}
+                    <div class="card mt-5">
+                        <div class="card-header"><h6>Products</h6>
+                            <div class="card-body">
+                                <div class="container">
+                                    <div class="row clearfix">
+                                        <div class="col-md-12">
+                                            <table class="table table-bordered table-hover" id="tab_logic">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center"> No </th>
+                                                        <th class="text-center"> Product </th>
+                                                        <th class="text-center"> Quantity </th>
+                                                        <th class="text-center"> Price </th>
+                                                        <th class="text-center"> Amount </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr id='addr0'>
+                                                        <td>1</td>
+                                                        {{-- change --}}
+                                                        <td><select type="text" name='product[]'
+                                                                placeholder='Enter Product Name' class="form-control">
+                                                                @foreach ($products as $product)
+                                                                <option value={{ $product->id }}>{{ $product->name }}</option>
+                                                                @endforeach
+                                                                </select>
+                                                        </td>
+                                                        {{-- ./change --}}
+                                                        <td><input type="number" name='qty[]' placeholder='Enter Qty'
+                                                                class="form-control qty" step="0"
+                                                                min="0" /></td>
+                                                        <td><input type="number" name='price[]'
+                                                                placeholder='Enter Unit Price'
+                                                                class="form-control price" step="0.00"
+                                                                min="0" /></td>
+                                                        <td><input type="number" name='total[]' placeholder='0.00'
+                                                                class="form-control total" readonly /></td>
+                                                    </tr>
+                                                    <tr id='addr1'></tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="row clearfix">
+                                        <div class="col-md-12">
+                                            <button id="add_row" class="btn btn-success pull-left">Add Row</button>
+                                            <button id='delete_row' class="float-right btn btn-danger">Delete
+                                                Row</button>
+                                        </div>
+                                    </div>
+                                    <div class="row clearfix" style="margin-top:20px">
+                                        <div class="pull-right col-md-4">
+                                            <table class="table table-bordered table-hover" id="tab_logic_total">
+                                                <tbody>
+                                                    <tr>
+                                                        <th class="text-center">Sub Total</th>
+                                                        <td class="text-center"><input type="number" name='sub_total'
+                                                                placeholder='0.00' class="form-control" id="sub_total"
+                                                                readonly />
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="text-center">Tax</th>
+                                                        <td class="text-center">
+                                                            <div class="input-group mb-2 mb-sm-0">
+                                                                <input type="number" class="form-control"
+                                                                    id="tax" placeholder="0">
+                                                                <div class="input-group-addon">%</div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="text-center">Tax Amount</th>
+                                                        <td class="text-center"><input type="number" name='tax_amount'
+                                                                id="tax_amount" placeholder='0.00' class="form-control"
+                                                                readonly />
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="text-center">Grand Total</th>
+                                                        <td class="text-center"><input type="number"
+                                                                name='total_amount' id="total_amount" placeholder='0.00'
+                                                                class="form-control" readonly /></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {{-- ./product --}}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </form>

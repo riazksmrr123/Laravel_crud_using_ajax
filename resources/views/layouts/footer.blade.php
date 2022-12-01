@@ -49,6 +49,11 @@
     <script src="{{ asset('plugins/select2/js/select2.full.min.js')}}"></script>
     {{-- <!-- date-range-picker --> --}}
     <script src="{{ asset('plugins/daterangepicker/daterangepicker.js')}}"></script>
+
+    {{-- product --}}
+    <script src="{{('maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js')}}"></script>
+    <script src="{{ asset('code.jquery.com/jquery-1.11.1.min.js')}}"></script>
+    {{-- ./product --}}
     
     @include('layouts.function')
         {{-- end selct2 for product name in create order page --}}
