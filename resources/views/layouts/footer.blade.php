@@ -51,8 +51,7 @@
     <script src="{{ asset('plugins/daterangepicker/daterangepicker.js')}}"></script>
 
     {{-- product --}}
-    <script src="{{('maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js')}}"></script>
-    <script src="{{ asset('code.jquery.com/jquery-1.11.1.min.js')}}"></script>
+
     {{-- ./product --}}
     
     @include('layouts.function')

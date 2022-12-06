@@ -40,5 +40,8 @@ Route::put('products/update/{id}',[ProductController::class,'update']);
 
 Route::get('orders/index',[OrderController::class,'index']);
 Route::get('orders/create',[OrderController::class,'create']);
+Route::post('orders/store',[OrderController::class,'store']);
+// Route::get('orders/price/{id}',[OrderController::class,'getprice']);
+
 
 

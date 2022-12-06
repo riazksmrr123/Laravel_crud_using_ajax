@@ -4,7 +4,7 @@
 
 <div class="content-wrapper">
     <div class="card col">
-        <form action="{{ url('orders/store') }}" enctype="multipart/form-data" method="POST">
+        <form action="#" enctype="multipart/form-data" method="POST">
             @csrf
             <div class="card-body">
                 <div class="form-group">
