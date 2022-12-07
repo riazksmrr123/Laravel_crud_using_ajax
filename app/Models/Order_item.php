@@ -9,7 +9,7 @@ class Order_item extends Model
 {
     protected $table = 'order_items';
     protected $fillable = ['id', 'order_id', 'product_id', 'price', 'quantity', 'value'];
-    protected $casts = [
+    protected $casts=[
         //'order_id' => 'array',
         'product_id' => 'array',
         'price' => 'array',

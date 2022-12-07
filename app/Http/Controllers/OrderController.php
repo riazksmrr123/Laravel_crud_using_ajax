@@ -42,9 +42,29 @@ class OrderController extends Controller
             'order_total' => $request->total_amount,
 
         ]);
+            $order_item = new Order_item;
+
+
+            $order_item->order_id = $order->id;
+            $order_item->product_id = $request->product;
+            $order_item->price = $request->price;
+            $order_item->quantity = $request->quantity;
+            $order_item->value = $request->total;
         // dd($order);
 
         if (!empty($order)) {
+            foreach ($order_item as $item) {
+                Order_item::create([
+                    'order_id' => $order->id, 
+                    'product_id' => $item->product_id,
+                    'price'  => $item->price,
+                    'quantity' => $item->quantity,
+                    'value' => $item->value,
+                ]);        
+            }
+
+
+            //new 
 
             // $order_id = $order->id;
             // $product_id = $request->product;
@@ -67,15 +87,15 @@ class OrderController extends Controller
 
             //---------------------
 
-            $product = Product::get();
-            $order_item = new Order_item;
+            // $product = Product::get();
+            // $order_item = new Order_item;
 
 
-            $order_item->order_id = $order->id;
-            $order_item->product_id = $request->product;
-            $order_item->price = $request->price;
-            $order_item->quantity = $request->quantity;
-            $order_item->value = $request->total;
+            // $order_item->order_id = $order->id;
+            // $order_item->product_id = $request->product;
+            // $order_item->price = $request->price;
+            // $order_item->quantity = $request->quantity;
+            // $order_item->value = $request->total;
             // dd($request->all());
             // dd($order_item);
 
@@ -84,22 +104,22 @@ class OrderController extends Controller
             // order items foreach start
 
 
-            $orderItems = [];
-            foreach ($order_item as $item) {
-                $orderItems[] = [
-                    'order_id' => $item->order_id,
-                    'product_id' => $item->product_id,
-                    'price' => $item->price,
-                    'quantity' => $item->quantity,
-                    'value' => $item->value,
-                ];
+            // $orderItems = [];
+            // foreach ($order_item as $item) {
+            //     $orderItems[] = [
+            //         'order_id' => $item->order_id,
+            //         'product_id' => $item->product_id,
+            //         'price' => $item->price,
+            //         'quantity' => $item->quantity,
+            //         'value' => $item->value,
+            //     ];
 
-            }
+            // }
             // DB::table('order_items')->insert($orderItems);
-            Order_item::insert($orderItems);
+            // Order_item::insert($orderItems);
             // end order items foreach
 
-            // $orderItems->save();
+            //$orderItems->save();
             return redirect()->back()->with('message', 'Order placed successfully');
         }
     }
