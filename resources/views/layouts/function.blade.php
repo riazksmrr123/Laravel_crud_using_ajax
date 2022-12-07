@@ -174,18 +174,18 @@
             $('#tab_logic').append(`<tr id="row-`+i+`">
                 
                                     <td>`+i+`</td>
-                                    <td><select type="text" name='product' id="productList-`+i+`"
+                                    <td><select type="text" name='product[]' id="productList-`+i+`"
                                             placeholder='Enter Product Name' class="form-control">
                                             <option>Choose Product</option>
                                             @foreach ($products as $product)
-                                            <option price={{ $product->price }}>{{ $product->name }}</option>
+                                            <option value={{ $product->id }} price={{ $product->price }}>{{ $product->name }}</option>
                                             @endforeach
                                             </select>
                                     </td>
-                                    <td><input type="number" name='qty[]' placeholder='Enter Qty'
+                                    <td><input type="number" name='quantity[]' placeholder='Enter Qty'
                                             class="form-control qty" step="0"
                                             min="0" /></td>
-                                    <td><input type="text" name='price' id="price-`+i+`"
+                                    <td><input type="text" name='price[]' id="price-`+i+`"
                                             placeholder='Enter Unit Price'
                                             class="form-control price" step="0.00"
                                             min="0" /></td>

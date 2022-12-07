@@ -66,20 +66,20 @@
                                                 <tr id='row-1'>
                                                     <td>1</td>
                                                     {{-- change --}}
-                                                    <td><select type="text" name='product' id="productList-1"
+                                                    <td><select type="text" name='product[]' id="productList-1"
                                                             placeholder='Enter Product Name' class="form-control">
                                                             <option>Choose Product</option>
                                                             @foreach ($products as $product)
-                                                                <option price={{ $product->price }}>{{ $product->name }}
+                                                                <option value={{ $product->id }} price={{ $product->price }}>{{ $product->name }}
                                                                 </option>
                                                             @endforeach
                                                         </select>
                                                     </td>
                                                     {{-- ./change --}}
-                                                    <td><input type="number" name='qty[]' placeholder='Enter Qty'
+                                                    <td><input type="number" name='quantity[]' placeholder='Enter Qty'
                                                             class="form-control qty" step="0" min="0" />
                                                     </td>
-                                                    <td><input type="text" name='price' id="price-1"
+                                                    <td><input type="text" name='price[]' id="price-1"
                                                             placeholder='Enter Unit Price' class="form-control price"
                                                             step="0.00" min="0" /></td>
                                                     <td><input type="number" name='total[]' placeholder='0.00'
