@@ -42,26 +42,45 @@ class OrderController extends Controller
             'order_total' => $request->total_amount,
 
         ]);
-            $order_item = new Order_item;
+        // $order_item = new Order_item;
 
 
-            $order_item->order_id = $order->id;
-            $order_item->product_id = $request->product;
-            $order_item->price = $request->price;
-            $order_item->quantity = $request->quantity;
-            $order_item->value = $request->total;
-        // dd($order);
+        // $order_item->order_id = $order->id;
+        // $order_item->product_id = $request->product;
+        // $order_item->price = $request->price;
+        // $order_item->quantity = $request->quantity;
+        // $order_item->value = $request->total;
+        // // dd($order_item);
+        // // dd($order);
 
         if (!empty($order)) {
-            foreach ($order_item as $item) {
-                Order_item::create([
-                    'order_id' => $order->id, 
-                    'product_id' => $item->product_id,
-                    'price'  => $item->price,
-                    'quantity' => $item->quantity,
-                    'value' => $item->value,
-                ]);        
-            }
+            // $order_item = $order;
+                $size = count(collect($request)->get('quantity'));
+
+                for ($i = 0; $i < $size; $i++) {
+
+                        $orderitem = Order_item::create([
+
+                            'order_id' => $order->id,
+                            'product_id' => $request->get('product')[$i],
+                            'quantity' => $request->get('quantity')[$i],
+                            'price' => $request->get('price')[$i],
+                            'value' => $request->get('total')[$i],
+                            'total' => 3,''
+                        ]);
+
+                        dd('hello world');
+
+    }
+            //     foreach ($order_item as $item) {
+            //         Order_item::create([
+            //             'order_id' => $order->id, 
+            //             'product_id' => $item->product_id,
+            //             'price'  => $item->price,
+            //             'quantity' => $item->quantity,
+            //             'value' => $item->value,
+            //         ]);        
+            // }
 
 
             //new 
@@ -91,13 +110,49 @@ class OrderController extends Controller
             // $order_item = new Order_item;
 
 
-            // $order_item->order_id = $order->id;
+            // $order_id = $order->id;
             // $order_item->product_id = $request->product;
             // $order_item->price = $request->price;
             // $order_item->quantity = $request->quantity;
             // $order_item->value = $request->total;
+            ///new
+
+            // $product_id = $order_item['product_id'];
+            // $price = $order_item['price'];
+            // $quantity = $order_item['quantity'];
+            // $value = $order_item['value'];
+
+
+            // Order_item::insert(array_combine( $product_id,$price));
+            ///new
+
             // dd($request->all());
             // dd($order_item);
+            // $jsoncheck = jeson_decode($order_item,true);
+            // dd($jsoncheck);
+            // intval($order_item);
+            // json_decode($order_item);
+            // foreach ($order_item as $order_item) {
+            //         $order_item = new Order_item;
+            //         [
+
+
+            //         $order_item->order_id=$order->id,
+            //         $order_item->product_id = $request->product,
+            //         $order_item->price=$request->price,
+            //         $order_item->quantity=$request->quantity,
+            //         $order_item->value=$request->total,
+
+                    
+                    
+            //         ];
+                    // dd($order_item);
+
+
+                // ($order_item)->save();
+                // }
+            // dd($order_item);
+            // $item->save();
 
             //------------
 
