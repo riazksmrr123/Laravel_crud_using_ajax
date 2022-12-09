@@ -45,4 +45,25 @@
     </div>
 </div>
 
+
+<script>
+    $(function() {
+        // $("#citytable").DataTable({
+        //     "responsive": true,
+        //     "lengthChange": false,
+        //     "autoWidth": false,
+        //     // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        // }).buttons().container().appendTo('#citytable_wrapper .col-md-6:eq(0)');
+        // $('#citytable2').DataTable({
+        //     "paging": true,
+        //     "lengthChange": false,
+        //     "searching": true,
+        //     "ordering": true,
+        //     "info": true,
+        //     "autoWidth": false,
+        //     "responsive": true,
+        // });
+    });
+</script>
+
 @include('layouts.footer')

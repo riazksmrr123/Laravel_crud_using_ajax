@@ -55,7 +55,9 @@
     {{-- ./product --}}
     
     @include('layouts.function')
-        {{-- end selct2 for product name in create order page --}}
+    <script src="{{ asset('dist/js/custom.js')}}"></script>
+
+    
   </div>
 </body>
 </html>

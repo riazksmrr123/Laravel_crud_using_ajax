@@ -60,7 +60,7 @@ public function store(Request $request)
     {
         $products=Product::find($id);
         $products->delete();
-        return redirect()->route('products/index');
+        return redirect('products/index');
     }
 
     //update product

@@ -22,12 +22,7 @@
 
                     <div class="row">
                         <div class="col-md-12 bg-white">
-                            <div class="container">
-                                <div class="row mb-4">
-                                    {{-- cut --}}
-                                    {{-- ./cut --}}
-                                </div>
-                            </div>
+                            
                             <div class="w-100">
                                 <label for="name">Customer Name*</label>
                                 <select class="form-control mb-4 w-100" name="customerName" required>
@@ -38,7 +33,7 @@
                                     </optgroup>
                                 </select>
                                 <label for="date">Date*</label>
-                                <input type="date" class="form-control w-100" name="date">
+                                <input type="date" class="form-control w-100" name="date" value="<?php echo date("Y-m-d"); ?>">
                             </div>
                         </div>
                     </div>
@@ -77,7 +72,7 @@
                                                     </td>
                                                     {{-- ./change --}}
                                                     <td><input type="number" name='quantity[]' placeholder='Enter Qty'
-                                                            class="form-control qty" step="0" min="0" />
+                                                            class="form-control qty" step="0" min="1" />
                                                     </td>
                                                     <td><input type="text" name='price[]' id="price-1"
                                                             placeholder='Enter Unit Price' class="form-control price"
@@ -114,7 +109,7 @@
                                                     <td class="text-center">
                                                         <div class="input-group mb-2 mb-sm-0">
                                                             <input type="number" name="tax_percentage"
-                                                                class="form-control" id="tax" placeholder="0">
+                                                                class="form-control" id="tax" placeholder="0"  min="0" value="0">
                                                             <div class="input-group-addon">%</div>
                                                         </div>
                                                     </td>
@@ -150,4 +145,8 @@
 </div>
 </div>
 
+<script>
+    
+    
+</script>
 @include('layouts.footer')

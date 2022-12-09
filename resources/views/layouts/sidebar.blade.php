@@ -100,17 +100,17 @@
                         </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item ">
-                                    <a href="{{ url('orders/index') }}" class="nav-link">
+                                    <a href="{{ url('orders/create') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>List</p>
+                                        <p>Create</p>
                                     </a>
                                 </li>
-                                {{-- <li class="nav-item">
-                                    <a href="{{ url('products/create') }}" class="nav-link">
+                                <li class="nav-item ">
+                                    <a href="{{ url('orders/edit') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Add</p>
+                                        <p>Update</p>
                                     </a>
-                                </li> --}}
+                                </li>
                             </ul>
                     </li>
 

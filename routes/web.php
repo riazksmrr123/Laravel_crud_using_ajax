@@ -38,10 +38,11 @@ Route::get('products/edit/{id}',[ProductController::class,'edit']);
 Route::post('products/delete/{id}',[ProductController::class,'destroy']);
 Route::put('products/update/{id}',[ProductController::class,'update']);
 
-Route::get('orders/index',[OrderController::class,'index']);
+// Route::get('orders/index',[OrderController::class,'index']);
 Route::get('orders/create',[OrderController::class,'create']);
 Route::post('orders/store',[OrderController::class,'store']);
-// Route::get('orders/price/{id}',[OrderController::class,'getprice']);
+Route::get('orders/edit',[OrderController::class,'edit']);
+Route::get('orders/update',[OrderController::class,'update']);
 
 
 
