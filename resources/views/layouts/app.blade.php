@@ -76,5 +76,7 @@
             @yield('content')
         </main>
     </div>
+
+    {{-- footer script --}}
 </body>
 </html>

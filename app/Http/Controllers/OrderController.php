@@ -64,34 +64,55 @@ class OrderController extends Controller
 
         //edit order
 
-        public function edit()
+        public function edit(Request $request)
         {
+            $id = $request->id;
+            if(!is_null($id) && !empty($id))
+            {
+                $customers = Customer::get();
+            $products = Product::get();
 
-        return view('orders.update');
+                $orderId = DB::table('orders')->where('id', $id)->value('id');
+                $order = DB::table('orders')->where('id', $id)->first();
+                $orderItems = DB::table('order_items')->where('order_id', $orderId)->first();
+                $values=['ordersDetails','itemDetails','products'];
+            //dd($customers);
+                                
+                return view('orders.update',compact('customers','order','orderItems'));
+                
+            }
+            
+            else
+            {
+                return view('orders.update');
+            }
+
+       
+        
 
          }
+
+         //show record with specific order id
 
          //update order details
 
     public function update(Request $request)
-         {
-            //match requested id with order id column
-            $id=$request->id;
-            $orderid = DB::table('orders')->where('id',$id)->value('id');
-            //fetch item details with order id
-            $itemdetails = DB::table('order_items')->where('order_id', $orderid )->first();
-        return view('orders.update', compact('itemdetails'));
-        dd($itemdetails);
-
-            dd($orderid);
-            if (Order::where('id' == $id->exists()))
-             {
-            // dd('hello');
-                // user found
-             }
-
-        //    dd('hello pakistan');
- 
-          }
+    {
+        
+        // $customers = Customer::get();
+        $customers = Customer::get();
+        $products = Product::get();
+        $id = $request->id;
+        
+        
+        
+        // $customerId= DB::table('orders')->where('id', $orderid)->value('customer_id');
+        
+        // dd($customerId);
+        
+        
+        // return view('orders.update',compact('ordersdetails','itemdetails','customers','products'));
+        // dd($result);
+        }
     }
 
