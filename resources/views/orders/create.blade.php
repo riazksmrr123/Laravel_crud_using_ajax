@@ -1,6 +1,6 @@
-@include('layouts.header')
-@include('layouts.sidebar')
-@include('layouts.navbar')
+@extends('layouts.default')
+
+@section('content')
 
 <div class="container-fluid">
     <div class="content-wrapper py-5 px-4">
@@ -149,4 +149,4 @@
     
     
 </script>
-@include('layouts.footer')
+@endsection

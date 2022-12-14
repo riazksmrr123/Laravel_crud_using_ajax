@@ -1,52 +1,112 @@
-@include('layouts.header')
-@include('layouts.sidebar')
-@include('layouts.navbar')
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<div class="content-wrapper">
-    <div class="card col">
-        <form action="#" enctype="multipart/form-data" method="POST">
-            @csrf
-            <div class="card-body">
-                <div class="form-group">
-                    <label for="sale_price">Customer</label>
-                    <select class="form-control select2-multiple" name="customerName" id="customerName"
-                        multiple="multiple" required>
-                        <optgroup label="Select Customer Name">
-                            @foreach ($customers as $customer)
-                                <option value={{ $customer->id }}>{{ $customer->name }}</option> --}}
-                            @endforeach
-                        </optgroup>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <select class="form-control select2-multiple" name="productName" id="productName"
-                        multiple="multiple" required>
-                        <optgroup label="Select Product">
-                            @foreach ($products as $product)
-                                <option value={{ $product->id }}>{{ $product->name }}</option> --}}
-                            @endforeach
-                        </optgroup>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="sale_price">Price</label>
-                    <input type="text" class="form-control" name="price" id="price">
-                </div>
-                <div class="form-group">
-                    <label for="description">Quantity</label>
-                    <input type="text" class="form-control" name="quantity" id="quantity"
-                        placeholder="Eenter Quantity">
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>{{ config('app.name', 'Laravel') }}</title>
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+
+    <!-- Scripts -->
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
+    {{-- code --}}
+    {{-- <!-- Google Font: Source Sans Pro --> --}}
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  {{-- <!-- Font Awesome --> --}}
+  <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css')}}">
+  {{-- <!-- Ionicons --> --}}
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  {{-- <!-- Tempusdominus Bootstrap 4 --> --}}
+  <link rel="stylesheet" href="{{ asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
+  {{-- <!-- iCheck --> --}}
+  <link rel="stylesheet" href="{{asset('plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
+  {{-- <!-- JQVMap --> --}}
+  <link rel="stylesheet" href="{{asset('plugins/jqvmap/jqvmap.min.css')}}">
+  {{-- <!-- Theme style --> --}}
+  <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
+  {{-- <!-- overlayScrollbars --> --}}
+  <link rel="stylesheet" href="{{asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
+  {{-- <!-- Daterange picker --> --}}
+  <link rel="stylesheet" href="{{asset('plugins/daterangepicker/daterangepicker.css')}}">
+  {{-- <!-- summernote --> --}}
+  <link rel="stylesheet" href="{{asset('plugins/summernote/summernote-bs4.min.css')}}">
+  <link rel="stylesheet" href="{{asset('dist/js/custom.js')}}">
+  {{-- select2 --}}
+  <link rel="stylesheet" href="{{asset('plugins/select2/css/select2.min.css')}}">
+  <link rel="stylesheet" href="{{asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
+  
+
+
+  <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
+</head>
+<body>
+    <div id="app">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+            <div class="container">
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    {{ config('app.name', 'Laravel') }}
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Left Side Of Navbar -->
+                    <ul class="navbar-nav me-auto">
+
+                    </ul>
+
+                    <!-- Right Side Of Navbar -->
+                    <ul class="navbar-nav ms-auto">
+                        <!-- Authentication Links -->
+                        @guest
+                            @if (Route::has('login'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                            @endif
+
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                        @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
+                    </ul>
                 </div>
             </div>
-            <!-- /.card-body -->
+        </nav>
 
-            <div class="card-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-        </form>
-
+        <main class="py-4">
+            @yield('content')
+        </main>
     </div>
-</div>
 
-@include('layouts.footer')
+    {{-- footer script --}}
+</body>
+</html>

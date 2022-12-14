@@ -1,7 +1,6 @@
-@include('layouts.header')
-@include('layouts.sidebar')
-@include('layouts.navbar')
+@extends('layouts.default')
 
+@section('content')
 <div class="content-wrapper">
     <div class="col-md-8 mx-auto pt-5">
         <!-- card -->
@@ -72,7 +71,4 @@
         });
     });
 </script>
-
-
-{{--   end ajax   --}}
-@include('layouts.footer')
+@endsection

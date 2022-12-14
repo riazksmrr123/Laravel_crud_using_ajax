@@ -41,8 +41,11 @@ Route::put('products/update/{id}',[ProductController::class,'update']);
 // Route::get('orders/index',[OrderController::class,'index']);
 Route::get('orders/create',[OrderController::class,'create']);
 Route::post('orders/store',[OrderController::class,'store']);
-Route::get('orders/edit',[OrderController::class,'edit']);
-Route::get('orders/update',[OrderController::class,'update']);
+
+// Route::get('orders/update',[OrderController::class,'update']);
+Route::get('orders/index',[OrderController::class,'index']);
+Route::get('orders/edit/{id}',[OrderController::class,'edit']);
+Route::post('orders/update/{id}',[OrderController::class,'update']);
 
 
 

@@ -16,8 +16,9 @@ class OrderController extends Controller
     //show all orders record
     public function index()
     {
-        //dd('hello pakistan');
-        return view('orders.index');
+        // dd('hello pakistan');
+        $allOrders = Order::get();
+        return view('orders.index',compact('allOrders'));
     }
 
     //show create order page
@@ -62,57 +63,68 @@ class OrderController extends Controller
             return redirect()->back()->with('message', 'Order placed successfully');
         }
 
-        //edit order
-
-        public function edit(Request $request)
+        //Edit order
+        public function edit($id)
         {
-            $id = $request->id;
-            if(!is_null($id) && !empty($id))
-            {
-                $customers = Customer::get();
+        // dd('Test case is working fine');
+            $allOrders=Order::find($id);
+            $orderId = $allOrders->id;
+        // dd($orderId);
+        // $allOrders = intval($allOrders);
+        // dd($allOrders->sub_total);
+            $orderItems = DB::table('order_items')->where('order_id',$orderId)->first();
+            // dd($orderItems);
+            // $customerId = DB::table('orders')->where('customer_id',$orderItems->customer_id);
+            $customers = Customer::get();
             $products = Product::get();
-
-                $orderId = DB::table('orders')->where('id', $id)->value('id');
-                $order = DB::table('orders')->where('id', $id)->first();
-                $orderItems = DB::table('order_items')->where('order_id', $orderId)->first();
-                $values=['ordersDetails','itemDetails','products'];
-            //dd($customers);
-                                
-                return view('orders.update',compact('customers','order','orderItems'));
-                
-            }
-            
-            else
-            {
-                return view('orders.update');
-            }
-
-       
-        
-
-         }
-
-         //show record with specific order id
-
-         //update order details
+            return view('orders.update',compact('allOrders','orderItems','customers','products'));
+        }
 
     public function update(Request $request)
     {
+        $order = $request -> id;
+        // dd($order);
+            Order::updateOrCreate(['id'=>$request->id],
+            [
+            'customer_id' => $request->customerName,
+            'order_date' => $request->date,
+            'sub_total' => $request->sub_total,
+            'tax_percentage' => $request->tax_percentage,
+            'tax_amount' => $request->tax_amount,
+            'order_total' => $request->total_amount,
+
+            ]);
+        // dd('executed successfully');
+            
+        $product_id = $request->product;
+        // dd($product_id);
+        $price = $request->price;
+        // dd($price);
+        $quantity = $request->quantity;
+        // dd($quantity);
+        $total = $request->total;
+        // dd($total);
+        for ($i = 0; $i < count($quantity); $i++)
+            // dd($i);
+                {
+                    Order_item::updateOrCreate(['id'=>$request->id],
+                    [
+                        'order_id' => $order,
+                        'product_id' => intval($product_id[$i]),
+                        'price' => intval($price[$i]),       
+                        'quantity' => intval($quantity[$i]),
+                        'value' => intval($total[$i]),
+                    ]);
+            // dd('query executed successfully');
+                    return redirect()->back()->with('message', 'Order Updated successfully');
+            }
+            // return redirect()->back()->with('message','Trya again');
+
+
         
-        // $customers = Customer::get();
-        $customers = Customer::get();
-        $products = Product::get();
-        $id = $request->id;
-        
-        
-        
-        // $customerId= DB::table('orders')->where('id', $orderid)->value('customer_id');
-        
-        // dd($customerId);
-        
-        
-        // return view('orders.update',compact('ordersdetails','itemdetails','customers','products'));
-        // dd($result);
-        }
+
+        // dd('Hello laravel');
+     }
+     
     }
 

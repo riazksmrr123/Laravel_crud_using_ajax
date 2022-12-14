@@ -11,14 +11,14 @@ class CityController extends Controller
     function index()
     {
         $cities = City::get();
-        return view('cities.allcities',compact('cities'));
+        return view('cities.index',compact('cities'));
 
     }
 
     //Show form for add new city
     function show()
     {
-        return view('cities.addcity');
+        return view('cities.create');
 
     }
 
@@ -26,15 +26,12 @@ class CityController extends Controller
 
     public function create(Request $request)
     {
-        if($request->filled('name')){
-                // dd($request);
-                City::updateOrCreate(['id'=>$request->id],
-                ['name'=>$request->name]);
-                dd('Hello');
-                return response()->json(['success','City Added successfully']);
-                return redirect('/cities/index');
-                }
-        return redirect('cities.addcity');
+        if($request->filled('name'))
+        {
+            City::create(['name' => $request->name]);
+            return redirect()->back()->with('message','success','City Added successfully');
+        }
+        return redirect('cities.create');
     }
 
 }

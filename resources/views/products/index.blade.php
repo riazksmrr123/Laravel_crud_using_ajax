@@ -1,8 +1,6 @@
-@include('layouts.header')
-@include('layouts.navbar')
-@include('layouts.sidebar')
+@extends('layouts.default')
 
-
+@section('content')
 
 <div class="col">
     <div class="content-wrapper">
@@ -124,6 +122,4 @@
 </div>
 {{-- model close --}}
 
-
-
-@include('layouts.footer')
+@endsection

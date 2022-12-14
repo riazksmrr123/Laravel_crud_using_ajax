@@ -1,6 +1,6 @@
-@include('layouts.header')
-@include('layouts.sidebar')
-@include('layouts.navbar')
+@extends('layouts.default')
+
+@section('content')
 
 <div class="content-wrapper">
 <div class="card col mt-4 col">
@@ -22,41 +22,47 @@
         <table class="table m-0">
           <thead>
           <tr>
-            <th>Order ID</th>
-            <th>Product</th>
-            <th>Unit Price</th>
-            <th>Quantity</th>
-            <th>Status</th>
-            <th>Created</th>
-            <th>Deliverd Date</th>
-            <th>Sub Total</th>
+            <th>ID</th>
+            <th>Customer_ID</th>
+            <th>Order_date</th>
+            <th>Sub_Total</th>
+            <th>Tax_Percentage</th>
+            <th>Tax_Amount</th>
+            <th>Total</th>
+            <th>Edit</th>
           </tr>
           </thead>
           <tbody>
+            @foreach ($allOrders as $Order)
           <tr>
-            <td>OR9842</td>
-            <td>Call of Duty IV</td>
-            <td>45</td>
+           
+              
+            
+            <td>{{ $Order->id }}</td>
+            <td>{{ $Order->customer_id }}</td>
+            <td>{{ $Order->order_date }}</td>
+            <td>{{ $Order->sub_total }}</td>
+            <td>{{ $Order->tax_percentage }}</td>
+            <td>{{ $Order->tax_amount }}</td>
+            <td>{{ $Order->order_total }}</td>
             <td>
-              <div>2</div>
+              <a href="{{ url('orders/edit',$Order->id) }}" class="btn btn-danger" method="post">Edit</a>
             </td>
-            <td>Shipped</td>
-            <td>Created Date</td>
-            <td>Deliverd Date</td>
-            <td>90</td>
+
+           
           </tr>
+          @endforeach
           </tbody>
         </table>
       </div>
-      <!-- /.table-responsive -->
     </div>
     <!-- /.card-body -->
     <div class="card-footer clearfix">
-      <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Order</a>
-      <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All Orders</a>
+      <a href="{{ url('orders/create') }}" class="btn btn-sm btn-success float-left mt-2">Place New Order</a>
+
     </div>
     <!-- /.card-footer -->
   </div>
 </div>
 
-  @include('layouts.footer')
+@endsection

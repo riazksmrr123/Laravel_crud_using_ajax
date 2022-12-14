@@ -85,6 +85,7 @@
             $(this).html('Save');
 
             $.ajax({
+                Debugger
                 data: $('#customerForm').serialize(),
                 url: "{{ route('customers.store') }}",
                 type: "POST",
@@ -170,6 +171,14 @@
         
       
         $(document).on("click", ".record .delete", function() {
+            //check row length
+            // if($("#tab_logic tbody tr").length === 1){
+            //      $(".delete").prop('disabled' , true).addClass('disabled');
+            // }
+            // console.log($("#myTable2 tbody tr").length);
+            // });
+
+            //check row length
             var getid = $(this).attr("id");
             var num= getid.substr(getid.indexOf("-") + 1);
             
@@ -221,6 +230,7 @@
 
             //  get product price
             $(document).on('change', "#tab_logic select", function() {
+                // check for the row length
                 //get 'id' from select tag    //   
                 var getid = $(this).attr("id");
                 var num= getid.substr(getid.indexOf("-") + 1);

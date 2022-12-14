@@ -1,6 +1,6 @@
-@include('layouts.header')
-@include('layouts.sidebar')
-@include('layouts.navbar')
+@extends('layouts.default')
+
+@section('content')
 <div class="content-wrapper">
     <style>
         .pagination,
@@ -66,4 +66,4 @@
     });
 </script>
 
-@include('layouts.footer')
+@endsection

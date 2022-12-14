@@ -1,6 +1,6 @@
-@include('layouts.header')
-@include('layouts.navbar')
-@include('layouts.sidebar')
+@extends('layouts.default')
+
+@section('content')
 
 <div class="content-wrapper">
     <div class="col col-md-12">
@@ -86,4 +86,4 @@
     </div>
 </div>
 
-@include('layouts.footer')
+@endsection

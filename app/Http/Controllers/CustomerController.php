@@ -61,14 +61,19 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
 
+
         Customer::updateOrCreate(['id'=>$request->customer_id],
         ['name'=>$request->name,
         'address'=>$request->address,
         'CityID'=>$request->CityID,
         'notes'=>$request->notes,
 
+
     ]);
-        return response()->json(['success','Customer Added successfully']);
+        // dd('hello pakistan');
+    
+    return redirect('customers.index')->with('success', 'Customer has been added');
+        // return response()->json(['success','Customer Added successfully']);
     }
 
     /**
