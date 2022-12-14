@@ -29,7 +29,7 @@ class CityController extends Controller
         if($request->filled('name'))
         {
             City::create(['name' => $request->name]);
-            return redirect()->back()->with('message','success','City Added successfully');
+            // return response()->json(['message','success','City Added successfully']);
         }
         return redirect('cities.create');
     }

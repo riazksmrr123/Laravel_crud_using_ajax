@@ -72,8 +72,8 @@ class CustomerController extends Controller
     ]);
         // dd('hello pakistan');
     
-    return redirect('customers.index')->with('success', 'Customer has been added');
-        // return response()->json(['success','Customer Added successfully']);
+    // return redirect('customers.index')->with('success', 'Customer has been added');
+        return response()->json(['success','Customer Added successfully']);
     }
 
     /**

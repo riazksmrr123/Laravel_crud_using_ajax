@@ -2,6 +2,7 @@
 
 @section('content')
 
+
 <div class="col">
     <div class="content-wrapper">
         <section class="content-header">
@@ -14,6 +15,13 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
+        {{-- message --}}
+@if(session()->has('message'))
+<div class="alert alert-success text-align:center data-dissmis">
+    {{ session()->get('message') }}
+</div>
+@endif
+{{-- message --}}
 
         {{-- add new btn --}}
         <div class="card-header">

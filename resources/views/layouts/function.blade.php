@@ -85,7 +85,6 @@
             $(this).html('Save');
 
             $.ajax({
-                Debugger
                 data: $('#customerForm').serialize(),
                 url: "{{ route('customers.store') }}",
                 type: "POST",
@@ -152,19 +151,19 @@
             $("body").toggleClass("sidebar-collapse");
         });        
      
-        $('#CityID').select2({
-            multiple:true
-        });
-        $('#CityID').find(':selected').data('custom-attribute');
+        // $('#CityID').select2({
+        //     multiple:true
+        // });
+        // $('#CityID').find(':selected').data('custom-attribute');
      
-        $('#customerName').select2({
-            multiple:true
-        });
-        $('#customerName').find(':selected').data('custom-attribute');
+        // $('#customerName').select2({
+        //     multiple:true
+        // });
+        // $('#customerName').find(':selected').data('custom-attribute');
       
-        $('#productName').select2({
-            multiple:true
-        });
+        // $('#productName').select2({
+        //     multiple:true
+        // });
         // start price papulate
              
         //.price papulate end

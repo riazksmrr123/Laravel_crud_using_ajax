@@ -72,13 +72,26 @@ public function store(Request $request)
         $products->sale_price  = $request->input('sale_price');
         $products->description = $request->input('description');
         $products->sku         = $request->input('sku');
+    // dd($products);
         
         $image      = $request->file('product_image');
         $image_name = time(). '.'.$image->getClientOriginalName();
         $image->move('images/',$image_name);
+
+        //
+        $products->product_image = $image_name;
+        // dd($products);
+
       
-        Product::where('id', $id)->update(['product_image' => $image_name]);
-        return redirect('products/index');
+        Product::where('id', $id)->update([
+          'name'=>$products->name,
+          'price'=>$products->price,
+          'sale_price'=>$products->sale_price,
+          'description'=>$products->description,
+          'sku' =>$products->sku,
+          'product_image' => $products->product_image
+        ]);
+        return redirect('products/index')->with('message','Product Updated Successfully');
     }
   
 }

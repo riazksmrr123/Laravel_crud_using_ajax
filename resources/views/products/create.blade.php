@@ -12,7 +12,13 @@
             <!-- /.card-header -->
             <!-- form start -->
 
-            {{--  --}}
+            {{-- message --}}
+            @if(session()->has('message'))
+            <div class="alert alert-success">
+                {{ session()->get('message') }}
+            </div>
+            @endif
+            {{-- end message --}}
 
                 @if (isset($products->id))
                     <form class="" method="POST" action="{{ url('products/update', $products->id ) }}" enctype="multipart/form-data">

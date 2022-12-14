@@ -86,8 +86,8 @@
                       </div>
                       <div class="form-group">
                         <label for="city"> City</label>
-                          <select class="form-control select2-multiple" name="CityID" id="CityID" multiple="multiple" required>
-                            <optgroup label="Select City">
+                          <select class="form-control" name="CityID" id=""  required>
+                            <optgroup label="Choose City">
                               @foreach ($cities as $city)
                               <option value={{ $city->id }}>{{ $city->name }}</option>
                               @endforeach
