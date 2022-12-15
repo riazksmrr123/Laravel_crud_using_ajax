@@ -165,6 +165,7 @@
         //     multiple:true
         // });
         // start price papulate
+        
              
         //.price papulate end
         

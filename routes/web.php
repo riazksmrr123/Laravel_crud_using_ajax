@@ -18,13 +18,13 @@ use App\Http\Controllers\OrderController;
 |
 */
 
-Route::get('', function () {
-    return view('welcome');
-});
+// Route::get('', function () {
+//     return view('custoemrs.index');
+// });
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']); //->name('home');
+// Auth::routes();
+// Route::get('', 'CustomerController@index');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']); //->name('home');
 Route::resource('customers',CustomerController::class);//->middleware('auth');
 
 Route::get('cities/index',[CityController::class,'index']);

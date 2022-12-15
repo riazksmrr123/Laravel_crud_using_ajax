@@ -67,24 +67,24 @@ class OrderController extends Controller
         public function edit($id)
         {
         // dd('Test case is working fine');
-            $allOrders=Order::find($id);
-            $orderId = $allOrders->id;
-        // dd($orderId);
-        // $allOrders = intval($allOrders);
-        // dd($allOrders->sub_total);
-            $orderItems = DB::table('order_items')->where('order_id',$orderId)->first();
-            // dd($orderItems);
-            // $customerId = DB::table('orders')->where('customer_id',$orderItems->customer_id);
             $customers = Customer::get();
             $products = Product::get();
-            return view('orders.update',compact('allOrders','orderItems','customers','products'));
+
+            $allOrders=Order::find($id);
+            $orderId = $allOrders->id;
+            $orderWithAllItems = DB::table('order_items')->where('order_id', $orderId)->get();     
+            $productsId = DB::table('order_items')->where('order_id', $orderId)->get('product_id');
+        // dd($productsId);           
+
+        // dd($orderWithAllItems);
+            return view('orders.update',compact('allOrders','customers','products','orderWithAllItems','productsId'));
         }
 
     public function update(Request $request)
     {
         $order = $request -> id;
         // dd($order);
-            Order::updateOrCreate(['id'=>$request->id],
+        Order::where('id',$request->id)->update(
             [
             'customer_id' => $request->customerName,
             'order_date' => $request->date,
@@ -101,18 +101,19 @@ class OrderController extends Controller
         $price = $request->price;
         // dd($price);
         $quantity = $request->quantity;
-        // dd($quantity);
+
+
         $total = $request->total;
+        // dd($quantity,$price,$total);
         // dd($total);
         for ($i = 0; $i < count($quantity); $i++)
             // dd($i);
                 {
-                    Order_item::updateOrCreate(['id'=>$request->id],
+                    Order_item::where('order_id',$order)->update(
                     [
-                        'order_id' => $order,
                         'product_id' => intval($product_id[$i]),
                         'price' => intval($price[$i]),       
-                        'quantity' => intval($quantity[$i]),
+                        'quantity' => ($quantity[$i]),
                         'value' => intval($total[$i]),
                     ]);
             // dd('query executed successfully');

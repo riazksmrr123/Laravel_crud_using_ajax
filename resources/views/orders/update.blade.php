@@ -1,6 +1,6 @@
-@include('layouts.header')
-@include('layouts.sidebar')
-@include('layouts.navbar')
+@extends('layouts.default')
+
+@section('content')
 
 <div class="container-fluid">
     <div class="content-wrapper py-5 px-4">
@@ -17,7 +17,7 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-md-6">
-                        <h5>Create Order</h5>
+                        <h5>Update Order</h5>
                     </div>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                         <div class="card-body">
                             <div class="container">
                                 <div class="col-md-12">
-                                    <table class="table table-bordered table-hover record" id="update_table">
+                                    <table class="table table-bordered table-hover record" id="tab_logic">
                                         <thead>
                                             <tr>
                                                 <th class="text-center"> No </th>
@@ -56,51 +56,52 @@
                                                 <th class="text-center"> Delete </th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr id='row-1'>
-                                                <td>1</td>
-                                                {{-- change --}}
-                                                <td><select readonly type="text" name='product[]' id="productList"
-                                                        placeholder='Enter Product Name' class="form-control">
-                                                        @foreach ($products as $product)
-                                                            <option
-                                                                value={{ $product->id }}
-                                                                price={{ $product->price }}>
-                                                                {{ $product->name }}>
-                                                            </option>
-                                                        @endforeach
 
-                                                    </select>
-                                                </td>
-                                                {{-- ./change --}}
+                                        <tbody>
+                                            @foreach ($orderWithAllItems as $ordItems)
+                                            <tr id='row-1'>
+                                                <td>{{ $ordItems->id }}</td>
+                                               {{-- change --}}
+                                                        <td><select type="text" name='product[]' id="productList-1"
+                                                                class="form-control" >
+                                                                {{-- <option value="{{ $shopping->id }}" {{$company->shopping_id == $shopping->id  ? 'selected' : ''}}>{{ $shopping->fantasyname}}</option> --}}
+                                                                @foreach ($products as $product)
+                                                                    <option value="{{ $product->id }}" {{ $product->id== array($productsId) ? 'selected' : '' }}
+                                                                        price="{{ $product->price }}">{{ $product->name }}
+                                                                    </option>
+                                                                @endforeach
+                                                                
+                                                            </select>
+                                                        </td>
+                                                        {{-- ./change --}}
                                                 <td><input type="number" name='quantity[]' placeholder='Enter Qty'
                                                         class="form-control qty" step="0" min="1"
-                                                        value="{{ $orderItems->quantity }}" />
+                                                        value="{{ $ordItems->quantity }}" />
                                                 </td>
                                                 <td><input type="text" name='price[]' id="price-1"
                                                         placeholder='Enter Unit Price' class="form-control price"
                                                         step="0.00" min="0"
-                                                        value="{{ $orderItems->price }}" /></td>
+                                                        value="{{ $ordItems->price }}" /></td>
                                                 <td><input type="number" name='total[]' placeholder='0.00'
-                                                        class="form-control total" value="{{ $orderItems->value }}"
+                                                        class="form-control total" value="{{ $ordItems->value }}"
                                                         readonly /></td>
-                                                <td><a id='delete_row-1' class="btn btn-danger delete">Delete
-                                                        Row</a></td>
+                                                <td><a id='delete_row-1' class="btn btn-danger delete">Delete</a></td>
                                             </tr>
+                                            @endforeach
 
                                         </tbody>
                                     </table>
                                 </div>
                                 <div class="w-100 mb-5">
                                     <div class="col-md-12">
-                                        <a id=" disabled" class="btn btn-success" disabled>Add Row</a>
+                                        <a class="btn btn-success">Add Row</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="container">
                                 <div class="w-100">
-                                    <div class="pull-right col-md-4">
-                                        <table class="table table-bordered table-hover" id="update_order_total">
+                                    <div class="col-md-4 float-right">
+                                        <table class="table table-bordered table-hover " id="update_order_total">
 
                                             <tbody>
 
@@ -158,4 +159,10 @@
     </div>
 </div>
 
-@include('layouts.footer')
+{{-- get selected option --}}
+<script>
+   $('select[name=product] option').filter(':selected').val()
+    </script>
+{{-- get selected option --}}
+
+@endsection
