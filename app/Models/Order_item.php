@@ -18,9 +18,10 @@ class Order_item extends Model
     ];
     public function productItems()
     {
-        return $this->hasMany(Product::class);
-
+        return $this->hasMany(Product::class,'order_item');
+        
 
     }
+
     use HasFactory;
 }

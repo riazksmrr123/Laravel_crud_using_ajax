@@ -2,6 +2,7 @@
 
 @section('content')
 
+
 <div class="container-fluid">
     <div class="content-wrapper py-5 px-4">
         {{-- message --}}
@@ -61,13 +62,19 @@
                                             @foreach ($orderWithAllItems as $ordItems)
                                             <tr id='row-1'>
                                                 <td>{{ $ordItems->id }}</td>
+                                                
                                                {{-- change --}}
-                                                        <td><select type="text" name='product[]' id="productList-1"
-                                                                class="form-control" >
+                                                        <td><select type="text" name='product[]' id="productList-1" value="{{ old($ordItems->product_id) }}"
+                                                                class="form-control products">
                                                                 {{-- <option value="{{ $shopping->id }}" {{$company->shopping_id == $shopping->id  ? 'selected' : ''}}>{{ $shopping->fantasyname}}</option> --}}
                                                                 @foreach ($products as $product)
-                                                                    <option value="{{ $product->id }}" {{ $product->id== array($productsId) ? 'selected' : '' }}
-                                                                        price="{{ $product->price }}">{{ $product->name }}
+                                                                {{-- dd($product->product->name); --}}
+                                                                {{-- @if(!empty($oldvalue)) {{ old('project_year') }}  --}}
+                                                                {{--  --}}
+
+                                                                    <option value={{$product->id}}
+                                                                        price={{$product->price}}>{{$product->name}}
+                                                                        {{-- price={{ $product->price }}>{{ $product->name }} --}}
                                                                     </option>
                                                                 @endforeach
                                                                 
@@ -94,7 +101,7 @@
                                 </div>
                                 <div class="w-100 mb-5">
                                     <div class="col-md-12">
-                                        <a class="btn btn-success">Add Row</a>
+                                        <a id="add_row" class="btn btn-success">Add Row</a>
                                     </div>
                                 </div>
                             </div>
@@ -159,10 +166,45 @@
     </div>
 </div>
 
-{{-- get selected option --}}
+{{-- add dynamic row --}}
 <script>
-   $('select[name=product] option').filter(':selected').val()
-    </script>
-{{-- get selected option --}}
+    $(document).ready(function () {
+var i = 2;
+$("#add_row").click(function () {
+    b = i - 1;
+    $("#row-" + i)
+        .html($("#row-" + b).html())
+        .find("td:first-child")
+        .html(i + 1);
+    $("#tab_logic").append(
+        `<tr id="row-`+ i +`">
+            
+            <td>` + i + `</td>
+            <td>
+            <select type="text" name='product[]' id="productList-`+ i +`"
+                    placeholder='Enter Product Name' class="form-control">
+                    <option>Choose Product</option>
+                    @foreach ($products as $product)
+                            <option value={{ $product->id }} price={{ $product->price }}>{{ $product->name }}</option>
+                    @endforeach
+            </select>
+            </td>
+            <td><input type="number" name='quantity[]' placeholder='Enter Qty'
+                    class="form-control qty" step="0"
+                    min="0" /></td>
+            <td><input type="text" name='price[]' id="price-`+ i +`"
+                    placeholder='Enter Unit Price'
+                    class="form-control price" step="0.00"
+                    min="0" /></td>
+            <td><input type="number" name='total[]' placeholder='0.00'
+                    class="form-control total" readonly /></td>
+            <td><a id="delete_row-`+ i +`" class="btn btn-danger delete">Delete</a></td>
+    </tr>`
+    );
+    i++;
+});
+});
+
+</script>
 
 @endsection

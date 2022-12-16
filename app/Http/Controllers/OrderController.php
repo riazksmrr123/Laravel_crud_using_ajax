@@ -77,6 +77,13 @@ class OrderController extends Controller
         // dd($productsId);           
 
         // dd($orderWithAllItems);
+            $orderId = $allOrders->id;
+            // $products = Order_item::find()->order_items()->where('order_id',$orderId)->get();
+
+        // dd($products);
+                    
+                    
+
             return view('orders.update',compact('allOrders','customers','products','orderWithAllItems','productsId'));
         }
 
