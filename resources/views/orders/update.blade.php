@@ -5,15 +5,11 @@
 
 <div class="container-fluid">
     <div class="content-wrapper py-5 px-4">
-        {{-- message --}}
         @if (session()->has('message'))
             <div class="alert alert-success">
                 {{ session()->get('message') }}
             </div>
         @endif
-
-        {{-- ./message --}}
-
         <div class="card col ">
             <div class="card-header">
                 <div class="row">
@@ -24,6 +20,7 @@
             </div>
             <div class="card-body">
                 <form action="{{ url('orders/update',$allOrders->id) }}" method="POST">
+                    
                     @csrf
                     <div class="row">
                         <div class="col-md-12 bg-white">
@@ -61,26 +58,17 @@
                                         <tbody>
                                             @foreach ($orderWithAllItems as $ordItems)
                                             <tr id='row-1'>
-                                                <td>{{ $ordItems->id }}</td>
-                                                
-                                               {{-- change --}}
+                                                <td id='id' name="ids">{{ $ordItems->id }}</td>
                                                         <td><select type="text" name='product[]' id="productList-1" value="{{ old($ordItems->product_id) }}"
                                                                 class="form-control products">
-                                                                {{-- <option value="{{ $shopping->id }}" {{$company->shopping_id == $shopping->id  ? 'selected' : ''}}>{{ $shopping->fantasyname}}</option> --}}
-                                                                @foreach ($products as $product)
-                                                                {{-- dd($product->product->name); --}}
-                                                                {{-- @if(!empty($oldvalue)) {{ old('project_year') }}  --}}
-                                                                {{--  --}}
-
-                                                                    <option value={{$product->id}}
-                                                                        price={{$product->price}}>{{$product->name}}
-                                                                        {{-- price={{ $product->price }}>{{ $product->name }} --}}
+                                                                    @foreach ($products as $product)
+                                                                    <option value="{{$product->id}}" 
+                                                                        {{ $product->id == $ordItems->product_id ? 'selected' : ''}}>
+                                                                        {{ $product->name }}
                                                                     </option>
                                                                 @endforeach
-                                                                
                                                             </select>
                                                         </td>
-                                                        {{-- ./change --}}
                                                 <td><input type="number" name='quantity[]' placeholder='Enter Qty'
                                                         class="form-control qty" step="0" min="1"
                                                         value="{{ $ordItems->quantity }}" />
@@ -109,17 +97,13 @@
                                 <div class="w-100">
                                     <div class="col-md-4 float-right">
                                         <table class="table table-bordered table-hover " id="update_order_total">
-
                                             <tbody>
-
                                                 <tr>
                                                     <th class="text-center">Sub Total</th>
-
                                                     <td class="text-center"><input type="number" name='sub_total'
                                                             value="{{ $allOrders->sub_total }}" placeholder='0.00'
                                                             class="form-control" id="sub_total" readonly />
                                                     </td>
-
                                                 </tr>
                                                 <tr>
                                                     <th class="text-center">Tax</th>
@@ -146,23 +130,21 @@
                                                             id="total_amount" placeholder='0.00' class="form-control"
                                                             value="{{ $allOrders->order_total }}" readonly /></td>
                                                 </tr>
-
                                             </tbody>
-
                                         </table>
-                                        <button type="submit" class="btn btn-primary float-right">Submit</button>
+                                        
+                                            
+                                        
+                                        <button type="submit" value="@foreach ($orderWithAllItems as $pro ){{ $pro->product_id }} @endforeach" class="updatebtn btn btn-primary float-right">Submit</button>
+                                        
                                     </div>
                                 </div>
                             </div>
-
-                            {{-- ./product --}}
                         </div>
                     </div>
                 </form>
             </div>
         </div>
-
-
     </div>
 </div>
 
@@ -204,7 +186,20 @@ $("#add_row").click(function () {
     i++;
 });
 });
-
 </script>
+
+{{-- ajax for update quantity --}}
+{{-- <script>
+    $(document).ready(function(){
+        $(document).on('click','.updatebtn',function(){
+            var prderId="{{ $allOrders->id }}"
+            var prod_id=$(this).val();
+            var qty="{{ $prqty }}";
+            alert (prod_id);
+            alert('quantity is',qty);
+        })
+    })
+</script> --}}
+{{-- ./ajax for update quantity --}}
 
 @endsection

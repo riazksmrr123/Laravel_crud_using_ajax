@@ -66,32 +66,25 @@ class OrderController extends Controller
         //Edit order
         public function edit($id)
         {
+        // dd($id);
         // dd('Test case is working fine');
             $customers = Customer::get();
             $products = Product::get();
 
             $allOrders=Order::find($id);
             $orderId = $allOrders->id;
-            $orderWithAllItems = DB::table('order_items')->where('order_id', $orderId)->get();     
-            $productsId = DB::table('order_items')->where('order_id', $orderId)->get('product_id');
-        // dd($productsId);           
-
-        // dd($orderWithAllItems);
+            $orderWithAllItems = DB::table('order_items')->where('order_id', $orderId)->get(); 
             $orderId = $allOrders->id;
-            // $products = Order_item::find()->order_items()->where('order_id',$orderId)->get();
 
-        // dd($products);
-                    
-                    
-
-            return view('orders.update',compact('allOrders','customers','products','orderWithAllItems','productsId'));
+            return view('orders.update',compact('allOrders','customers','products','orderWithAllItems'));
         }
 
-    public function update(Request $request)
+    public function update(Request $request,$id)
     {
-        $order = $request -> id;
-        // dd($order);
-        Order::where('id',$request->id)->update(
+        $order_id = $request -> id;
+        // dd($order_id);
+        
+        Order::where('id',$order_id)->update(
             [
             'customer_id' => $request->customerName,
             'order_date' => $request->date,
@@ -101,37 +94,38 @@ class OrderController extends Controller
             'order_total' => $request->total_amount,
 
             ]);
-        // dd('executed successfully');
-            
+
+
+        $items_id = Order_item::findMany($id);
+        dd($items_id);
+        
+
         $product_id = $request->product;
-        // dd($product_id);
         $price = $request->price;
-        // dd($price);
         $quantity = $request->quantity;
-
-
         $total = $request->total;
-        // dd($quantity,$price,$total);
-        // dd($total);
+        $productItemsId = $request->productItemsId;
+        // dd($productItemsId);
+        dd($request->orderItemsId);
+
+
         for ($i = 0; $i < count($quantity); $i++)
-            // dd($i);
                 {
-                    Order_item::where('order_id',$order)->update(
+                    
+
+                    Order_item::where('id',$request->orderItemsId)->update(
+                        
                     [
                         'product_id' => intval($product_id[$i]),
                         'price' => intval($price[$i]),       
-                        'quantity' => ($quantity[$i]),
+                        'quantity' => intval($quantity[$i]),
                         'value' => intval($total[$i]),
                     ]);
-            // dd('query executed successfully');
+            
                     return redirect()->back()->with('message', 'Order Updated successfully');
             }
             // return redirect()->back()->with('message','Trya again');
 
-
-        
-
-        // dd('Hello laravel');
      }
      
     }
