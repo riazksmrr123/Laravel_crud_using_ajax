@@ -26,6 +26,7 @@ use App\Http\Controllers\OrderController;
 // Route::get('', 'CustomerController@index');
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']); //->name('home');
 Route::resource('customers',CustomerController::class);//->middleware('auth');
+Route::get('customers/customersdata', [CustomerController::class, 'getData']);
 
 Route::get('cities/index',[CityController::class,'index']);
 Route::get('cities/add',[CityController::class,'show']);

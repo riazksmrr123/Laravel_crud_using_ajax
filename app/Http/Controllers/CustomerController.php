@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\DB;
 use DataTables;
 use App\Models\Customer;
 use App\Models\City;
@@ -34,6 +34,57 @@ class CustomerController extends Controller
             ->rawColumns(['action'])
             ->make(true);
             return $allcustomerdata;
+
+            //table server side processing
+            $draw 				= 		$request->get('draw'); // Internal use
+            $start 				= 		$request->get("start"); // where to start next records for pagination
+            $rowPerPage 		= 		$request->get("length"); // How many recods needed per page for pagination
+    
+            $orderArray 	   = 		$request->get('order');
+            $columnNameArray 	= 		$request->get('columns'); // It will give us columns array
+                                
+            $searchArray 		= 		$request->get('search');
+            $columnIndex 		= 		$orderArray[0]['column'];  // This will let us know,
+                                                                // which column index should be sorted 
+                                                                // 0 = id, 1 = name, 2 = email , 3 = created_at
+    
+            $columnName 		= 		$columnNameArray[$columnIndex]['data']; // Here we will get column name, 
+                                                                            // Base on the index we get 
+            $columnSortOrder 	= 		$orderArray[0]['dir']; // This will get us order direction(ASC/DESC)
+            $searchValue 		= 		$searchArray['value']; // This is search value 
+    
+            $customers = DB::table('customers');
+            $total = $customers->count();
+    
+            $totalFilter = DB::table('customers');
+            if (!empty($searchValue)) {
+                $totalFilter = $totalFilter->where('name','like','%'.$searchValue.'%');
+            }
+            $totalFilter = $totalFilter->count();
+    
+    
+            $arrData = DB::table('customers');
+            $arrData = $arrData->skip($start)->take($rowPerPage);
+            $arrData = $arrData->orderBy($columnName,$columnSortOrder);
+    
+            if (!empty($searchValue)) {
+                $arrData = $arrData->where('name','like'.$searchValue.'%');
+                // $arrData = $arrData->orWhere('city','like','%'.$searchValue.'%');
+            }
+            // dd('Hello pakistan');
+    
+            $arrData = $arrData->get();
+    
+            $response = array(
+                
+                "draw" => intval($draw),
+                "recordsTotal" => $total,
+                "recordsFiltered" => $totalFilter,
+                "data" => $arrData,
+            );
+    
+            return response()->json($response);
+            //data table server side processing
 
         }
         return view('customers.index',compact('customers', 'cities'));
@@ -127,5 +178,12 @@ class CustomerController extends Controller
     {
         Customer::find($id)->delete();
         return response()->json(['success'=>'Customer Deleted successfully']);
+    }
+
+
+    //get data for server side processing
+    public function getData(Request $request) {
+
+       
     }
 }

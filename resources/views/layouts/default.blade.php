@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}" />
   <title>Customer App</title>
-
  {{-- end toast cdn link --}}
   {{-- <!-- Google Font: Source Sans Pro --> --}}
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -32,16 +31,12 @@
   {{-- select2 --}}
   <link rel="stylesheet" href="{{asset('plugins/select2/css/select2.min.css')}}">
   <link rel="stylesheet" href="{{asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
-  
-
-
   <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
 </head>
 <body class="sidebar-mini layout-fixed">
   <div class="wrapper">
 <!-- Navbar -->
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-    {{-- appblade --}}
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
             {{ config('app.name', 'CustomersApp') }}
@@ -49,13 +44,10 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav me-auto">
-
             </ul>
-
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ms-auto">
                 <!-- Authentication Links -->
@@ -76,14 +68,12 @@
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }}
                         </a>
-
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
                             </a>
-
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
@@ -93,7 +83,6 @@
             </ul>
         </div>
     </div>
-    {{-- end appblade --}}
     <!-- Left navbar links -->
     <ul class="navbar-nav arrow">
         <li class="nav-item">
@@ -111,7 +100,6 @@
 <!-- /.end navbar -->
 
 {{-- sidebar --}}
-
 <div class="hold-transition sidebar-mini layout-fixed">
 
     <!-- Main Sidebar Container -->
@@ -227,13 +215,8 @@
                                 </li>
                             </ul>
                     </li>
-
-                    {{-- ./orders --}}
-
-                   
                 </ul>
             </nav>
-
             {{-- end customers menue --}}
         </div>
     </aside>
@@ -243,11 +226,7 @@
 
 @yield('content')
 {{-- footer --}}
-
 <footer class="main-footer">
-        {{-- DataTable Links scpipts --}}
-    
-        <script src="{{-- asset('/plugins/jquery/jquery.min.js') --}}"></script>
         {{-- <!-- Bootstrap 4 --> --}}
         <script src="{{asset('/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
         {{-- <!-- DataTables  & Plugins --> --}}
@@ -267,21 +246,15 @@
         <script src="{{asset('dist/js/adminlte.min.js')}}"></script>
         {{-- <!-- AdminLTE for demo purposes --> --}}
         <script src="{{asset('dist/js/demo.js')}}"></script>
-        <!-- Page specific script -->
         <!-- InputMask -->
         <script src="{{asset('plugins/moment/moment.min.js')}}"></script>
         <script src="{{asset('plugins/inputmask/jquery.inputmask.min.js')}}"></script>
-        {{-- End DataTable Links scripts --}} 
-     
         {{-- <!-- Bootstrap --> --}}
         <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
         {{-- <!-- overlayScrollbars --> --}}
         <script src="{{ asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
         {{-- <!-- AdminLTE App --> --}}
         <script src="{{ asset('dist/js/adminlte.js')}}"></script>
-        
-        {{-- <!-- PAGE PLUGINS --> --}}
-        {{-- <!-- jQuery Mapael --> --}}
         <script src="{{ asset('plugins/jquery-mousewheel/jquery.mousewheel.js')}}"></script>
         <script src="{{ asset('plugins/raphael/raphael.min.js')}}"></script>
         <script src="{{ asset('plugins/jquery-mapael/jquery.mapael.min.js')}}"></script>
@@ -290,21 +263,13 @@
         <script src="{{ asset('plugins/chart.js/Chart.min.js')}}"></script>
         {{-- <!-- AdminLTE for demo purposes --> --}}
         <script src="{{ asset('dist/js/demo.js')}}"></script>
-        {{-- <!-- AdminLTE dashboard demo (This is only for demo purposes) --> --}}
-    
         {{-- <!-- Select2 --> --}}
         <script src="{{ asset('plugins/select2/js/select2.full.min.js')}}"></script>
         {{-- <!-- date-range-picker --> --}}
         <script src="{{ asset('plugins/daterangepicker/daterangepicker.js')}}"></script>
-    
-        {{-- product --}}
-    
-        {{-- ./product --}}
-        
         @yield("script")
         <script type="text/javascript">
             $( document ).ready(function() {
-        
         
                 $.ajaxSetup({
                     headers: {
@@ -314,7 +279,9 @@
                 var table = $(".data-table").DataTable({
                     serverSide: true,
                     processing: true,
+                    order: [[0, "desc"]],
                     ajax: "{{ route('customers.index') }}",
+                    type: 'POST',
                     columns: [{
                             data: 'DT_RowIndex',
                             name: 'DT_RowIndex'
@@ -341,7 +308,6 @@
                         },
                     ]
                 });
-          
                     //   open model
                 $("#createNewCustomer").click(function() {
                     $("#customer_id").val('');
@@ -364,8 +330,6 @@
                     "autoWidth": false,
                     "responsive": true,
                 });
-          
-                    //   close
                 $("#addCustomer_menu").click(function() {
                     $("#createNewCustomer").click();
                 });
@@ -394,19 +358,15 @@
                         type: "POST",
                         dataType: 'json',
                         success: function(data) {
-        
                             $('#customerForm').trigger("reset");
                             $('#ajaxModel').modal('hide');
                             table.draw();
-        
                         },
                         error: function(data) {
                             console.log('Error:', data);
-        
                         }
                     });
                 });
-          
                 $('body').on('click', '.deleteCustomer', function() {
         
                     var customer_id = $(this).data("id");
@@ -425,13 +385,9 @@
                 });
                         //Datemask2 mm/dd/yyyy
                 $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
-        
-         
-                
                 $("#example1").DataTable({
                 "responsive": true, "lengthChange": false, "autoWidth": false,
                 }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        
                 $('#example2').DataTable({
                     "paging": true,
                     "lengthChange": false,
@@ -441,8 +397,6 @@
                     "autoWidth": false,
                     "responsive": true,
                 });
-           
-             
                 // side menu toggle
                 $(".nav-sidebar li").click(function(){
                     var getid = $(this).attr("id");
@@ -468,30 +422,19 @@
                 $('#productName').select2({
                     multiple:true
                 });
-                // start price papulate
-                     
-                //.price papulate end
                 
-              
-                $(document).on("click", ".record .delete", function() {
-                    //check row length
-                    // if($("#tab_logic tbody tr").length === 1){
-                    //      $(".delete").prop('disabled' , true).addClass('disabled');
-                    // }
-                    // console.log($("#myTable2 tbody tr").length);
-                    // });
-        
-                    //check row length
-                    var getid = $(this).attr("id");
-                    var num= getid.substr(getid.indexOf("-") + 1);
-                    
-                    $("#row-"+(num)).html('');
-                    //
-                   
-                    //
-                    calc();
-                });
-                
+                //delete table rows dynamically
+                $("#tab_logic").on('click', '.delete', function(){
+                    var rowCount = $('#tab_logic tr').length-1;
+                    if (rowCount > 1)
+                     {
+                        $(this).parent().parent().remove();
+                    } 
+                    else
+                    {
+                        alert("You can not Delete last row from Table");
+                    }
+}); 
                 $('#tab_logic tbody').on('keyup change',function(){
                     calc();
                 });
@@ -524,16 +467,8 @@
                     tax_sum=total/100*$('#tax').val();
                     $('#tax_amount').val(tax_sum.toFixed(2));
                     $('#total_amount').val((tax_sum+total).toFixed(2));
-                }
-        
-            // Dynamic row add in table
-            
-
-               
+                } 
             });
-               
-        
-                    //  get product price
                     $(document).on('change', "#tab_logic select", function() {
                         // check for the row length
                         //get 'id' from select tag    //   
@@ -544,22 +479,9 @@
                         //assign value in dynamic id
                         $("#price-"+num).val(price);
                     });
-                
-
-                
         </script>
-
         <script src="{{ asset('dist/js/custom.js') }}"></script>
-    
-        
       </div>
     </body>
     </html>
 </footer>
-{{-- end footer --}}
-
-{{-- end side bar --}}
-
-
-
-    {{-- nav bar end --}}

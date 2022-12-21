@@ -39,9 +39,9 @@
                   <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Name</th>
+                    <th data-sortable="true">Name</th>
                     <th>Address</th>
-                    <th>City</th>
+                    <th data-sortable="true">City</th>
                     <th>notes</th>
                     <th>Action</th>
                   </tr>
@@ -62,8 +62,6 @@
     </section>
     <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
-
   {{-- model --}}
   <div class="modal fade" id="ajaxModel" aria-hidden="true">
       <div class="modal-dialog">
@@ -110,6 +108,10 @@
       </div>
   </div>
   {{-- model close --}}
+
+  {{--/ server side processing for datatable --}}
+  
+  {{--./ server side processing for datatable --}}
 
 
  

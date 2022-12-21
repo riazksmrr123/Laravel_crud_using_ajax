@@ -10,9 +10,9 @@ class Order extends Model
     protected $table = 'orders';
     protected $fillable = ['id', 'customer_id', 'order_date', 'sub_total', 'tax_percentage', 'tax_amount', 'order_total'];
     use HasFactory;
-    public function addOrderItems()
+    public function OrderItems()
     {
-        return $this->hasMany(Order_item::class);
+        return $this->hasMany(Order_item::class,'order_id');
     }
 
     public function productItems()
